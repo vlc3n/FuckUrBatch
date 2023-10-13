@@ -11,9 +11,9 @@ for /f "skip=1 tokens=*" %%A in ('wmic cpu get loadpercentage ^| findstr /r "[0-
 )
 
 for /f "tokens=2" %%B in ('tasklist /fi "imagename eq cmd.exe" /nh ^| find /i "cmd.exe"') do (
-    set "memoryUsage=%%B"
+    set "memoryUsage=%%B Byte"
 )
 
-echo %date% %time%, !cpuUsage!, !memoryUsage! >> "%logFile%"
+echo %date% %time%, %cpuUsage%, %memoryUsage% >> "%logFile%"
 timeout /t %interval% >nul
 goto monitor_loop
